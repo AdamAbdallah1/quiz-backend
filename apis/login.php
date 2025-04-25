@@ -11,5 +11,7 @@ if ($email && $password) {
 
     $stmt->bind_param("ss", $email, $password);
 
+    $stmt->execute();
+    $result = $stmt->get_result();
     
 }
