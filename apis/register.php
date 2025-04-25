@@ -12,5 +12,6 @@ if ($username && $email && $password) {
     $sql = "INSERT INTO users (username, email, password, is_admin) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
-
+    $stmt->bind_param("sssi", $username, $email, $password, $is_admin);
+    
 }
