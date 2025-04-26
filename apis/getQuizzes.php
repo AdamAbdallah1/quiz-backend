@@ -18,9 +18,10 @@ if (isset($_SESSION['user'])) {
 
         if ($result->num_rows > 0) {
             while ($quiz = $result->fetch_assoc()) {
-                echo "\nQuizz Title: " . $quiz['title'] . " \n";
+                echo "\n============\nQuiz ID: " . $quiz['id'] . "\n";
+                echo "Quizz Title: " . $quiz['title'] . " \n";
                 echo "Description: " . $quiz['description'] . "\n";
-                echo "Owner: " . $_SESSION['user']['username'] . " \n\n";
+                echo "Owner: " . $_SESSION['user']['username'] . " \n===============\n";
             }
         } else {
             echo "No quizzes found";
