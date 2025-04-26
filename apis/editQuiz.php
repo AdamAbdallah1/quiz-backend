@@ -12,7 +12,13 @@ if (isset($_SESSION['user'])) {
         $new_title = $_POST['title'] ?? '';
         $new_description = $_POST['description'] ?? '';
 
-        
+        if ($id && $new_title && $new_description) {
+            $sql = "UPDATE quizzes SET title = ?, description = ?  WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssi", $new_title, $new_description, $id);
+
+            
+        }
 
     }
 }
