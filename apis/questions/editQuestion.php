@@ -16,7 +16,21 @@ if ($user['is_admin'] == 1){
     $new_title = $_POST['title'] ?? '';
     $new_description = $_POST['description'] ?? '';
 
-    if ($id, $new_title, $new_description) {
+    if ($id && $new_title && $new_description) {
+        $sql = "UPDATE questions SET title = ?, description = ?, WHERE question_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssi", $new_title, $new_description, $id);
         
+        if ($stmt->execute()){
+            echo "Question updated successfully!";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+        $stmt->close();
+    } else {
+        echo "Provide new title new description and quiz_id";
     }
+} else {
+    echo "Only admins can edit questions";
 }
+$conn->close();
