@@ -3,7 +3,7 @@
 session_start();
 header("Content-Type: text/html");
 
-include '../config/config.php';
+include '../../config/config.php';
 
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
