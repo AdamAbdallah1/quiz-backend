@@ -14,9 +14,13 @@ if ($email && $password) {
     $stmt->execute();
     $result = $stmt->get_result();
     
-    if ($result->num_rows === 1){
+    if ($result->num_rows == 1){
         $user = $result->fetch_assoc();
-        echo "Welcome User: " . $user['username'];
+        if ($user['is_admin'] === 1) {
+            echo "Welcome Admin: " . $user['username'];
+        } else{
+            echo "Welcome User: " . $user['username'];
+        }
     } else {
         echo "Invalid Email or Password";
     } 
