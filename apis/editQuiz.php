@@ -17,8 +17,15 @@ if (isset($_SESSION['user'])) {
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ssi", $new_title, $new_description, $id);
 
-            
+            if ($stmt->execute()){
+                echo "Quiz updates seccessfully!";
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+            $stmt->close();
+        } else {
+            echo "Please provide ID, new title, new description";
         }
-
     }
 }
+$conn->close();
