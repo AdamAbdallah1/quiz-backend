@@ -18,22 +18,20 @@ if ($email && $password) {
     
     if ($result->num_rows == 1){
         $user = $result->fetch_assoc();
+        $user = [
+            'id' => $user['id'],
+            'username' => $user['username'],
+            'email' => $user['email'],
+            'password' => $user['password'],
+            'is_admin' => $user['is_admin']
+        ];
+
+        $_SESSION['user'] = $user;
         if ($user['is_admin'] == 1) {
             echo "Welcome Admin: " . $user['username'];
-            $user = [
-                'id' => $user['id'],
-                'username' => $user['username'],
-                'email' => $user['email'],
-                'password' => $user['password'],
-                'is_admin' => $user['is_admin']
-            ];
-
-            $_SESSION['user'] = $user;
-        } else{
+                    } else{
             echo "Welcome User: " . $user['username'];
-            session_start();
-            $_SESSION['currUser'] = $user['email'];
-            $_SESSION['is_admin'] = 0;
+            
         }
     } else {
         echo "Invalid Email or Password";
