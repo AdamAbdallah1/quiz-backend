@@ -10,4 +10,4 @@ $conn = new mysqli($servername, $username, $password, $dbsname);
 if ($conn->connect_error) {
     die("Connection Error: ". $conn->connect_error);
 } 
-echo "Connected to: " . $dbsname;
+//echo "Connected to: " . $dbsname . "<br>";
