@@ -1,6 +1,6 @@
 <?php
 
-include '../config/config.php';
+include '../../config/config.php';
 
 $username = $_POST['username'] ?? '';
 $email = $_POST["email"] ?? '';
