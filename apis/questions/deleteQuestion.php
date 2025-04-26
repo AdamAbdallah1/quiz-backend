@@ -18,8 +18,16 @@ if ($user['is_admin'] == 1){
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
 
-        
+        if ($stmt->execute()){
+            echo "Question Deleted Successfully!";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+        $stmt->close();
     } else {
         echo "Please provide a correct ID";
-    }
+    } 
+} else {
+    echo "Only admins can delete the question";
 }
+$conn->close();
