@@ -18,8 +18,12 @@ if ($email && $password) {
         $user = $result->fetch_assoc();
         if ($user['is_admin'] === 1) {
             echo "Welcome Admin: " . $user['username'];
+            session_start();
+            $_SESSION['adminEmail'] = $user['email'];
         } else{
             echo "Welcome User: " . $user['username'];
+            session_start();
+            $_SESSION['userEmail'] = $user['email'];
         }
     } else {
         echo "Invalid Email or Password";
