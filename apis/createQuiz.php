@@ -1,16 +1,31 @@
 <?php
 
+session_start();
+
 include '../config/config.php';
 
-//echo "Quiz: " . $title . " Created!";
+if (!isset($_SESSION['user'])) {
+    echo "No session found!";
+    exit;
+}
 
-session_start();
-$is_admin = $_SESSION['is_admin'];
-if ($is_admin == 1) {
-    $currAdmin = $_SESSION['currAdmin'];
-    echo "Welcome Admin: " . $currAdmin;
+$user = $_SESSION['user'];
+if ($user['is_admin'] == 1){
+    echo "You are admin: " . $user['username'];
+
     $title = $_POST['title'] ?? '';
-    $description = $_POST['question'] ?? '';
-} else {
-    echo "You are not an admin!";
+    $description = $_POST['description'] ?? '';
+
+    if ($title && $description) {
+        $sql = "INSERT INTO quizzes (title, description, id_admin) VALUES (?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssi", $title, $description, $user['id']);
+
+        $stmt->execute();
+        
+    }
+
+}else {
+    echo "Normal user";
 }
