@@ -3,7 +3,13 @@ session_start();
 
 include '../config/config.php';
 
-if (isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])){
+    echo "No session found!";
+    exit;
+}
+
+$user = $_SESSION['user'];
+if ($user['is_admin'] == 1){
     $user = $_SESSION['user'];
     if ($user['id'] > 0) {
         echo "Welcome User: " . $user['username'] . "\n";
@@ -27,5 +33,7 @@ if (isset($_SESSION['user'])) {
             echo "Please provide ID, new title, new description";
         }
     }
+} else {
+    echo "Only admins can edit quizzes";
 }
 $conn->close();
